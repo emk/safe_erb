@@ -1,5 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../../../config/environment')
-require 'test_help'
+require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
 class TagHelperTest < Test::Unit::TestCase
   include ActionView::Helpers::TagHelper

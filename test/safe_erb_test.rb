@@ -1,5 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../../../config/environment')
-require 'test_help'
+require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
 class SafeERBTest < Test::Unit::TestCase
   def test_non_checking
