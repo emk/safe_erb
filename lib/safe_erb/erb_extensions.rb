@@ -1,20 +1,30 @@
 class ERB
-  cattr_accessor :check_tainted
-  alias_method :original_set_eoutvar, :set_eoutvar
-  
+  # Should we check for tainted values when building ERB templates?
+  def self.check_tainted?
+    value = Thread.current[:safe_erb_check_tainted]
+    value.nil? ? false : value
+  end
+
+  # Turn ERB taint-checking on and off.
+  def self.check_tainted= value
+    Thread.current[:safe_erb_check_tainted] = value
+  end
+
   def self.with_checking_tainted(&block)
-    # not thread safe
+    saved_value = ERB.check_tainted?
     ERB.check_tainted = true
     begin
       yield
     ensure
-      ERB.check_tainted = false
+      ERB.check_tainted = saved_value
     end
   end
   
+  alias_method :original_set_eoutvar, :set_eoutvar
+  
   def set_eoutvar(compiler, eoutvar = '_erbout')
     original_set_eoutvar(compiler, eoutvar)
-    if check_tainted
+    if ERB.check_tainted?
       if compiler.respond_to?(:insert_cmd)
         compiler.insert_cmd = "#{eoutvar}.concat_unless_tainted"
       else
