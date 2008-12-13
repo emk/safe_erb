@@ -2,7 +2,7 @@ class ERB
   # Should we check for tainted values when building ERB templates?
   def self.check_tainted?
     value = Thread.current[:safe_erb_check_tainted]
-    value.nil? ? false : value
+    value.nil? ? true : value
   end
 
   # Turn ERB taint-checking on and off.
@@ -10,9 +10,10 @@ class ERB
     Thread.current[:safe_erb_check_tainted] = value
   end
 
-  def self.with_checking_tainted(&block)
+  # Skip taint checks within the specified block.
+  def self.without_checking_tainted #:yield:
     saved_value = ERB.check_tainted?
-    ERB.check_tainted = true
+    ERB.check_tainted = false
     begin
       yield
     ensure

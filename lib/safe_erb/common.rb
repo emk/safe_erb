@@ -10,17 +10,17 @@ class ActionController::Base
   # so we'll set it anyways in the filter
   before_filter :taint_request
   
-  def render_with_checking_tainted(*args, &blk)
+  def render_with_taint_logic(*args, &blk)
     if @skip_checking_tainted
-      render_without_checking_tainted(*args, &blk)
-    else
-      ERB.with_checking_tainted do
-        render_without_checking_tainted(*args, &blk)
+      ERB.without_checking_tainted do
+        render_without_taint_logic(*args, &blk)
       end
+    else
+      render_without_taint_logic(*args, &blk)
     end
   end
 
-  alias_method_chain :render, :checking_tainted
+  alias_method_chain :render, :taint_logic
 
   private
   
