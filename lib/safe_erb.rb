@@ -3,6 +3,7 @@
 require 'safe_erb/common'
 require 'safe_erb/tag_helper'
 require 'safe_erb/erb_extensions'
+require 'safe_erb/action_view_extensions'
 
 if Rails::VERSION::MAJOR >= 2
   require 'safe_erb/rails_2'
