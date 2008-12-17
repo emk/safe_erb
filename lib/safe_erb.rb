@@ -10,3 +10,7 @@ if Rails::VERSION::MAJOR >= 2
 else
   require 'safe_erb/rails_1'
 end
+
+if ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::SQLite3Adapter)
+  require 'safe_erb/sqlite3_fix'
+end
