@@ -6,16 +6,15 @@ Safe ERB lets you make sure that the string written by "<%= %>" in your rhtml te
 
 The check is done using "tainted?" method in Object class which is a standard feature provided by Ruby - the string is "tainted" when it is read from IO. When ERB::Util#h method is called, this plugin "untaints" the string, and when "<%= %>" is called in your rhtml template, it raises an exception if the string you are trying to show is tainted.
 
+== About this version of Safe ERB
+
+This fork of Safe ERB has been modified to work with Mephisto under Rails 2.2.  It may work with other Rails applications.  Patches are welcome!
+
 == Installation
 
 Just put this plugin into vendor/plugins directory in your Rails application. No configuration is needed.
 
-Safe ERB works on Rails 1.2.x and 2.0.x. It has been tested using following database libraries:
-
-- PostgreSQL (postgres-0.7.1 gem)
-- MySQL (mysql-2.7 gem)
-
-It does NOT work properly on SQLite (because the data read from SQLite driver is not tainted).
+This version of Safe ERB has been tested with Mephisto under Rails 2.2.  It has been tested with SQLite3, and there's a decent chance it should work with PostgreSQL and MySQL (and any other database which properly taints the data returned from the database).
 
 == Details
 
@@ -29,6 +28,10 @@ The returned values from the following methods become untainted:
 
 Also, you can always untaint any string manually by calling "untaint" method (standard Ruby feature).
 
+Several ActionView helpers have also been modified to untaint their return values.  This is a temporary measure to get things working with Mephisto. See the source for details.
+
 == Contact
 
-Shinya Kasatani <kasatani at gmail.com>
+The orignal safe_erb plugin was written by Shinya Kasatani <kasatani at gmail.com>.
+
+This forked version was written by Eric Kidd, based on work by Matthew Bass.
