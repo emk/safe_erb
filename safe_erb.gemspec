@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{safe_erb}
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{Automatically detect improperty escaped text in ERB templates}
+  s.summary = %q{Automatically detect improperty-escaped text in ERB templates}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

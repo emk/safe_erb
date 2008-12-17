@@ -7,7 +7,7 @@ require 'rake/gempackagetask'
 
 GEM = "safe_erb"
 GEM_VERSION = "0.1.0"
-SUMMARY = "Automatically detect improperty escaped text in ERB templates"
+SUMMARY = "Automatically detect improperty-escaped text in ERB templates"
 AUTHORS = ["Shinya Kasatani", "Matthew Bass", "Eric Kidd"]
 EMAIL = "git@randomhacks.net"
 HOMEPAGE = "http://github.com/emk/safe_erb/tree/master"
