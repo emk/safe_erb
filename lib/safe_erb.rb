@@ -11,6 +11,11 @@ else
   require 'safe_erb/rails_1'
 end
 
-if ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::SQLite3Adapter)
-  require 'safe_erb/sqlite3_fix'
+if defined?(ActiveRecord)
+  adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
+  file = File.join(File.dirname(__FILE__), 'safe_erb', "#{adapter}_fix.rb")
+  if File.exists?(file)
+    ActiveRecord::Base.connection # Make sure our adapter classes are loaded.
+    require "safe_erb/#{adapter}_fix"
+  end
 end
