@@ -1,9 +1,7 @@
-module Rails
-  module VERSION
-    MAJOR = 2.1
-  end
-end
+RAILS_ENV = 'test'
 
 require 'rubygems'
-require 'test/unit'
+require 'active_record'
+require File.join(File.dirname(__FILE__), 'database_helper')
 require 'safe_erb'
+require 'test/unit'
