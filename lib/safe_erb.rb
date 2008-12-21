@@ -3,8 +3,8 @@
 require 'safe_erb/common'
 require 'safe_erb/tag_helper'
 require 'safe_erb/erb_extensions'
+require 'safe_erb/i18n_extensions'
 require 'safe_erb/action_view_extensions'
-require 'safe_erb/rails_2'
 
 # Load any database-specific monkey-patches that we need.
 begin

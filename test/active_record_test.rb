@@ -11,5 +11,14 @@ class DatabaseTest < Test::Unit::TestCase
       assert @note.send(a).tainted?, "#{a} should be tainted"
     end
   end
+
+  def test_error_messages_should_not_be_tainted
+    @note = Note.create(:title => "".taint, :text => "Hi".taint)
+    assert !@note.valid?, "#{@note} should not validate"
+    assert !@note.errors.tainted?
+    @note.errors.full_messages.each do |msg|
+      assert !msg.tainted?, "<#{msg}> is tainted"
+    end
+  end
 end
   

@@ -18,4 +18,5 @@ end
 
 # Define a model class.
 class Note < ActiveRecord::Base
+  validates_presence_of :title
 end
