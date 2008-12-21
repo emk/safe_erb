@@ -7,18 +7,14 @@ class DatabaseTest < ActiveSupport::TestCase
   end
 
   test "records from database should be tainted" do
-    [:title, :text].each do |a|
-      assert @note.send(a).tainted?, "#{a} should be tainted"
-    end
+    [:title, :text].each {|a| assert_tainted @note.send(a) }
   end
 
   test "error messages should not be tainted" do
     @note = Note.create(:title => "".taint, :text => "Hi".taint)
     assert !@note.valid?, "#{@note} should not validate"
-    assert !@note.errors.tainted?
-    @note.errors.full_messages.each do |msg|
-      assert !msg.tainted?, "<#{msg}> is tainted"
-    end
+    assert_not_tainted @note.errors
+    @note.errors.full_messages.each {|msg| assert_not_tainted msg }
   end
 end
   

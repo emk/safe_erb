@@ -21,20 +21,20 @@ class TagHelperTest < ActiveSupport::TestCase
 
   test "escape_once should untaint" do
     evil_str = "evil knievel".taint
-    assert !escape_once(evil_str).tainted?
-    assert escape_once_without_untaint(evil_str).tainted?
+    assert_not_tainted escape_once(evil_str)
+    assert_tainted escape_once_without_untaint(evil_str)
   end
 
   Post = Struct.new(:published_at)
 
   test "datetime_select should not be tainted" do
     @locals[:post] = Post.new(Time.now.taint)
-    assert !datetime_select(:post, :published_at).tainted?
+    assert_not_tainted datetime_select(:post, :published_at)
   end
 
   test "error_messages_for should not be tainted" do
     @note = Note.create(:title => "".taint, :text => "Hi".taint)
     assert !@note.valid?, "#{@note} should not validate"
-    assert !error_messages_for(:object => @note).tainted?
+    assert_not_tainted error_messages_for(:object => @note)
   end
 end

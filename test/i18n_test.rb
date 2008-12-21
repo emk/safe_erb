@@ -6,6 +6,6 @@ class I18nTest < ActiveSupport::TestCase
     # will cause buggy code in ActionView::Helpers to break.  See the
     # source for details.
     translation = I18n.t("messages.blank", :scope => [:activerecord, :errors])
-    assert !translation.tainted?, "<#{translation}> tainted"
+    assert_not_tainted translation
   end
 end

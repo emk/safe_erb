@@ -1,6 +1,7 @@
 # SafeERB
 
 require 'safe_erb/common'
+require 'safe_erb/assertion_helpers'
 require 'safe_erb/tag_helper'
 require 'safe_erb/erb_extensions'
 require 'safe_erb/i18n_extensions'
