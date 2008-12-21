@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
-class TagHelperTest < Test::Unit::TestCase
+class TagHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::DateHelper
   include ActionView::Helpers::ActiveRecordHelper
@@ -19,12 +19,7 @@ class TagHelperTest < Test::Unit::TestCase
     end
   end
 
-  def test_inclusion_in_taghelper
-    assert self.respond_to?(:escape_once_with_untaint)
-    assert self.respond_to?(:escape_once_without_untaint)
-  end
-
-  def test_taghelper_untaints
+  test "escape_once should untaint" do
     evil_str = "evil knievel".taint
     assert !escape_once(evil_str).tainted?
     assert escape_once_without_untaint(evil_str).tainted?
@@ -32,12 +27,12 @@ class TagHelperTest < Test::Unit::TestCase
 
   Post = Struct.new(:published_at)
 
-  def test_datetime_select_should_not_be_tainted
+  test "datetime_select should not be tainted" do
     @locals[:post] = Post.new(Time.now.taint)
     assert !datetime_select(:post, :published_at).tainted?
   end
 
-  def test_error_messages_for_should_not_be_tainted
+  test "error_messages_for should not be tainted" do
     @note = Note.create(:title => "".taint, :text => "Hi".taint)
     assert !@note.valid?, "#{@note} should not validate"
     assert !error_messages_for(:object => @note).tainted?
