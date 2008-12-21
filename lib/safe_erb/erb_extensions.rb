@@ -46,18 +46,17 @@ class ERB
   end
   
   module Util
-    alias_method :html_escape_without_untaint, :html_escape
-    
-    def html_escape(s)
-      h = html_escape_without_untaint(s)
-      h.untaint
-      h
+    def html_escape_with_untaint(s)
+      html_escape_without_untaint(s).untaint
     end
-    
-    alias_method :h, :html_escape
-    
+    alias_method_chain :html_escape, :untaint
+
+    def h_with_untaint(s)
+      h_without_untaint(s).untaint
+    end
+    alias_method_chain :h, :untaint
+
     module_function :h
     module_function :html_escape
-    module_function :html_escape_without_untaint
   end
 end
