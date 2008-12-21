@@ -2,10 +2,10 @@
 
 require 'safe_erb/common'
 require 'safe_erb/assertion_helpers'
-require 'safe_erb/tag_helper'
 require 'safe_erb/erb_extensions'
 require 'safe_erb/i18n_extensions'
 require 'safe_erb/action_view_extensions'
+require 'safe_erb/action_view_helpers_extensions'
 
 # Load any database-specific monkey-patches that we need.
 begin

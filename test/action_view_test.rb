@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
-class SafeERBTest < ActiveSupport::TestCase
+class ActionViewTest < ActiveSupport::TestCase
   def use_template file
     path = File.join(File.dirname(__FILE__), file)
     @template = ActionView::Template.new(path)
