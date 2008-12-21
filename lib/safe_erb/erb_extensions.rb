@@ -46,17 +46,14 @@ class ERB
   end
   
   module Util
-    def html_escape_with_untaint(s)
-      html_escape_without_untaint(s).untaint
-    end
-    alias_method_chain :html_escape, :untaint
+    extend SafeErb::TaintHelpers
+    
+    untaint_result :html_escape
+    untaint_result :h
 
-    def h_with_untaint(s)
-      h_without_untaint(s).untaint
-    end
-    alias_method_chain :h, :untaint
-
-    module_function :h
+    # For some unknown reason, these functions exist as both instance and
+    # module functions in the standard ERB::Util class.
     module_function :html_escape
+    module_function :h
   end
 end

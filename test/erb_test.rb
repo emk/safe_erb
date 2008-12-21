@@ -12,6 +12,4 @@ class ErbTest < ActiveSupport::TestCase
     assert_not_tainted html_escape("foo".taint)
     assert_not_tainted ERB::Util.html_escape("foo".taint)
   end
-
-
 end
